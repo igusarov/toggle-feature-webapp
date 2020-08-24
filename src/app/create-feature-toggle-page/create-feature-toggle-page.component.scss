@@ -1,0 +1,12 @@
+.form {
+  max-width: 300px;
+
+  & > mat-form-field {
+    display: block;
+  }
+
+  & > mat-slide-toggle {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
