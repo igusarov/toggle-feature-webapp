@@ -19,6 +19,10 @@ import {FeatureToggleListComponent} from './feature-toggle-list/feature-toggle-l
 import {CreateFeatureTogglePageComponent} from './create-feature-toggle-page/create-feature-toggle-page.component';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FeatureToggleFormComponent} from './feature-toggle-form/feature-toggle-form.component';
+import {EditFeatureTogglePageComponent} from './edit-feature-toggle-page/edit-feature-toggle-page.component';
+import {FeatureToggleService} from './services/feature-toggle.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +30,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FeatureToggleListPageComponent,
     FeatureToggleListComponent,
     CreateFeatureTogglePageComponent,
+    FeatureToggleFormComponent,
+    EditFeatureTogglePageComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,8 +50,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     MatChipsModule,
+    HttpClientModule,
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [
+    FeatureToggleService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

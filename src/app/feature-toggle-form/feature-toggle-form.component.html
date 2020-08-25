@@ -1,0 +1,69 @@
+<form class="form clearfix" [formGroup]="featureToggleForm" (ngSubmit)="handleSubmit()">
+  <mat-slide-toggle
+    class="example-margin"
+    formControlName="archive">
+    Archive
+  </mat-slide-toggle>
+  <mat-slide-toggle
+    formControlName="inverted"
+    class="example-margin">
+    Inverted
+  </mat-slide-toggle>
+  <mat-form-field
+    appearance="legacy">
+    <mat-label>Display name</mat-label>
+    <input formControlName="displayName" matInput>
+  </mat-form-field>
+  <mat-form-field
+    appearance="legacy">
+    <mat-label>Technical name</mat-label>
+    <input formControlName="technicalName" matInput>
+  </mat-form-field>
+  <mat-form-field
+    appearance="legacy">
+    <mat-label>Expires on</mat-label>
+    <input formControlName="expiresOn" matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field
+    appearance="legacy">
+    <mat-label>Description</mat-label>
+    <textarea formControlName="description" matInput></textarea>
+  </mat-form-field>
+  <mat-form-field class="example-chip-list">
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        *ngFor="let customer of selectedCustomers"
+        (removed)="handleRemoveCustomer(customer)">
+        {{customer.displayName}}
+        <mat-icon matChipRemove >cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Add customer..."
+        #addCustomerInput
+        [formControl]="addCustomerControl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      >
+    </mat-chip-list>
+    <mat-autocomplete
+      autoActiveFirstOption
+      #auto="matAutocomplete"
+      (optionSelected)="handleSelectCustomer($event.option.value)">
+      <mat-option *ngFor="let customer of foundCustomers$ | async" [value]="customer">
+        {{customer.displayName}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button
+    class="form__submit"
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="!featureToggleForm.valid"
+  >
+    {{featureToggle ? 'Save' : 'Create'}}
+  </button>
+</form>
