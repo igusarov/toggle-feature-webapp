@@ -1,6 +1,6 @@
 import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {Customer, FeatureToggle} from '../models/models';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {catchError, debounceTime, filter, switchMap} from 'rxjs/operators';
@@ -16,9 +16,9 @@ export class FeatureToggleFormComponent implements OnInit, OnChanges {
     archive: [false],
     inverted: [false],
     displayName: [null],
-    technicalName: [''],
-    expiresOn: [''],
-    description: [''],
+    technicalName: ['', Validators.required],
+    expiresOn: [null],
+    description: [null],
   };
   @Output() submitForm: EventEmitter<FeatureToggle> = new EventEmitter<FeatureToggle>();
   @Input() public featureToggle: FeatureToggle;
