@@ -1,9 +1,9 @@
 <mat-tab-group>
   <mat-tab label="Open">
-    <app-feature-toggle-list [items]="openItems$ | async" (clickItem)="handleClickItem($event)"></app-feature-toggle-list>
+    <app-feature-toggle-list [items]="openItems" (clickItem)="handleClickItem($event)"></app-feature-toggle-list>
   </mat-tab>
   <mat-tab label="Archive">
-    <app-feature-toggle-list [items]="archiveItems$ | async" (clickItem)="handleClickItem($event)"></app-feature-toggle-list>
+    <app-feature-toggle-list [items]="archiveItems" (clickItem)="handleClickItem($event)"></app-feature-toggle-list>
   </mat-tab>
 </mat-tab-group>
 <button class="create-button" mat-button mat-fab (click)="handleClickCreateButton()">

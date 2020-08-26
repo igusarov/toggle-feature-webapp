@@ -8,11 +8,11 @@ import {FeatureToggleListPageComponent} from './feature-toggle-list-page/feature
 import {
   MatAutocompleteModule,
   MatButtonModule, MatChipsModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatListModule, MatSlideToggleModule,
+  MatListModule, MatProgressSpinnerModule, MatSlideToggleModule,
   MatTabsModule
 } from '@angular/material';
 import {FeatureToggleListComponent} from './feature-toggle-list/feature-toggle-list.component';
@@ -24,6 +24,10 @@ import {EditFeatureTogglePageComponent} from './edit-feature-toggle-page/edit-fe
 import {FeatureToggleService} from './services/feature-toggle.service';
 import {HttpClientModule} from '@angular/common/http';
 import {CustomerService} from './services/customer.service';
+import {SpinnerComponent} from './spinner/spinner.component';
+import {SpinnerService} from './services/spinner.service';
+import {ErrorContentDialogComponent} from './error-content-dialog/error-content-dialog.component';
+import {AlertService} from './services/alert.service';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,8 @@ import {CustomerService} from './services/customer.service';
     CreateFeatureTogglePageComponent,
     FeatureToggleFormComponent,
     EditFeatureTogglePageComponent,
+    SpinnerComponent,
+    ErrorContentDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,10 +59,17 @@ import {CustomerService} from './services/customer.service';
     MatChipsModule,
     HttpClientModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
+    MatDialogModule
   ],
   providers: [
     FeatureToggleService,
-    CustomerService
+    CustomerService,
+    SpinnerService,
+    AlertService
+  ],
+  entryComponents: [
+    ErrorContentDialogComponent,
   ],
   bootstrap: [AppComponent]
 })
