@@ -31,7 +31,7 @@ export class FeatureToggleListPageComponent implements OnInit {
     );
   }
 
-  public handleClickItem(item: any): void {
+  public handleClickItem(item: FeatureToggle): void {
     this.router.navigate(['feature-toggles/', item.id]);
   }
 

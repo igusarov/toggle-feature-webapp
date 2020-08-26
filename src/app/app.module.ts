@@ -23,6 +23,7 @@ import {FeatureToggleFormComponent} from './feature-toggle-form/feature-toggle-f
 import {EditFeatureTogglePageComponent} from './edit-feature-toggle-page/edit-feature-toggle-page.component';
 import {FeatureToggleService} from './services/feature-toggle.service';
 import {HttpClientModule} from '@angular/common/http';
+import {CustomerService} from './services/customer.service';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {HttpClientModule} from '@angular/common/http';
   ],
   providers: [
     FeatureToggleService,
+    CustomerService
   ],
   bootstrap: [AppComponent]
 })
