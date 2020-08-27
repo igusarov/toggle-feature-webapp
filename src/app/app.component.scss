@@ -1,0 +1,19 @@
+@import "../mixins/index";
+
+@include desktop-layout() {
+  .container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: dimgrey;
+
+    &__app {
+      margin: 0 auto;
+      max-width: 600px;
+      background-color: white;
+      position: relative;
+      height: 100%;
+      overflow: auto;
+    }
+  }
+}
