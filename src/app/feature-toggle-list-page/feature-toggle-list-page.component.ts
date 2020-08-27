@@ -11,8 +11,8 @@ import {AlertService} from '../services/alert.service';
   styleUrls: ['feature-toggle-list-page.component.scss']
 })
 export class FeatureToggleListPageComponent implements OnInit {
-  public openItems: FeatureToggle[];
-  public archiveItems: FeatureToggle[];
+  public openItems: FeatureToggle[] = [];
+  public archiveItems: FeatureToggle[] = [];
 
   constructor(
     private router: Router,
