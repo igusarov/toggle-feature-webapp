@@ -3,3 +3,4 @@
     {{item.displayName || item.technicalName}}
   </mat-list-item>
 </mat-nav-list>
+<div *ngIf="!items.length" class="no-items">Empty list</div>
