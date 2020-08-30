@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {SpinnerService} from '../services/spinner.service';
 
 @Component({
@@ -9,5 +9,5 @@ import {SpinnerService} from '../services/spinner.service';
 export class SpinnerComponent {
   constructor(
     public spinnerService: SpinnerService,
-  ){}
+  ) {}
 }

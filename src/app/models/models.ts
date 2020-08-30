@@ -9,5 +9,6 @@ export interface FeatureToggle {
   expiresOn: string;
   description: string;
   archive: boolean;
+  inverted: boolean;
   customers: Customer[];
 }
