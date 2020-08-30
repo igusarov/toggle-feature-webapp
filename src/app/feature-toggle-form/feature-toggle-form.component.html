@@ -34,7 +34,7 @@
   <mat-form-field class="example-chip-list">
     <mat-chip-list #chipList aria-label="Fruit selection">
       <mat-chip
-        *ngFor="let customer of selectedCustomers"
+        *ngFor="let customer of selectedCustomers; trackBy: trackByFn"
         (removed)="handleRemoveCustomer(customer)">
         {{customer.displayName}}
         <mat-icon matChipRemove >cancel</mat-icon>
@@ -52,7 +52,7 @@
       autoActiveFirstOption
       #auto="matAutocomplete"
       (optionSelected)="handleSelectCustomer($event.option.value)">
-      <mat-option *ngFor="let customer of foundCustomers$ | async" [value]="customer">
+      <mat-option *ngFor="let customer of foundCustomers$ | async; trackBy: trackByFn" [value]="customer">
         {{customer.displayName}}
       </mat-option>
     </mat-autocomplete>

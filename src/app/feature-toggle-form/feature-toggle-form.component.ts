@@ -1,17 +1,29 @@
-import {Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges, OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {Customer, FeatureToggle} from '../models/models';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Observable, of} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {catchError, debounceTime, filter, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, filter, switchMap, takeUntil} from 'rxjs/operators';
 import {CustomerService} from '../services/customer.service';
 
 @Component({
   selector: 'app-feature-toggle-form',
   templateUrl: 'feature-toggle-form.component.html',
-  styleUrls: ['feature-toggle-form.component.scss']
+  styleUrls: ['feature-toggle-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FeatureToggleFormComponent implements OnInit, OnChanges {
+export class FeatureToggleFormComponent implements OnInit, OnChanges, OnDestroy {
   private static readonly defaultControlsConfig = {
     archive: [false],
     inverted: [false],
@@ -28,6 +40,7 @@ export class FeatureToggleFormComponent implements OnInit, OnChanges {
   public selectedCustomers: Customer[] = [];
   public separatorKeysCodes: number[] = [ENTER, COMMA];
   public featureToggleForm: FormGroup;
+  private unsubscribe$: Subject<void> = new Subject();
   constructor(
     private formBuilder: FormBuilder,
     private customerService: CustomerService,
@@ -40,6 +53,7 @@ export class FeatureToggleFormComponent implements OnInit, OnChanges {
       debounceTime(500),
       switchMap(value => this.customerService
         .fetchByNameStartsWith(value).pipe(
+          takeUntil(this.unsubscribe$),
           catchError(() => of([]))
         )
       ),
@@ -68,6 +82,10 @@ export class FeatureToggleFormComponent implements OnInit, OnChanges {
     this.submitForm.emit(
       this.prepareDataToSubmit()
     );
+  }
+
+  public trackByFn(item: Customer) {
+    return item.id;
   }
 
   private prepareDataToSubmit(): FeatureToggle {
@@ -101,5 +119,10 @@ export class FeatureToggleFormComponent implements OnInit, OnChanges {
       this.featureToggleForm = this.formBuilder.group(this.controlsConfig);
       this.selectedCustomers = this.featureToggle.customers;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
