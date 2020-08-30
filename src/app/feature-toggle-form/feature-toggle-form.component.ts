@@ -94,7 +94,7 @@ export class FeatureToggleFormComponent implements OnInit, OnChanges, OnDestroy 
       customers: this.selectedCustomers,
     };
     if (data.expiresOn && typeof data.expiresOn !== 'string') {
-      data.expiresOn = `${data.expiresOn.utc().format('YYYY-MM-DD')}T00:00:00Z`;
+      data.expiresOn = `${data.expiresOn.format('YYYY-MM-DD')}T00:00:00Z`;
     }
     return data;
   }
